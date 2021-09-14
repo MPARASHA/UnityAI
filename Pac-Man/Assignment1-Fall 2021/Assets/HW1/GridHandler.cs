@@ -20,18 +20,23 @@ public class GridHandler : NodeHandler
         
         for (float x = ObstacleHandler.Instance.XBound * -1; x <= ObstacleHandler.Instance.XBound + gridSize; x += gridSize)
         {    for (float y = ObstacleHandler.Instance.YBound * -1; y <= ObstacleHandler.Instance.YBound + gridSize; y += gridSize)
-            {
-                if(! ObstacleHandler.Instance.PointInObstacles(new Vector2(x, y))){
-                    Vector3 loc = new Vector3(x, y);
-                    nodeDictionary.Add(loc.ToString(), new GraphNode(loc));
+            {   
+                Vector3 loc = new Vector3(x, y); // The center of cell
+
+                if(!ObstacleHandler.Instance.PointInObstacles(loc)            
+                    && !ObstacleHandler.Instance.AnyIntersect(loc - new Vector3(gridSize, gridSize)/2f, loc + new Vector3(-gridSize, gridSize)/2f)
+                    && !ObstacleHandler.Instance.AnyIntersect(loc - new Vector3(gridSize, gridSize)/2f, loc + new Vector3(gridSize, -gridSize)/2f)
+                    && !ObstacleHandler.Instance.AnyIntersect(loc + new Vector3(gridSize, gridSize)/2f, loc + new Vector3(-gridSize, gridSize)/2f)
+                    && !ObstacleHandler.Instance.AnyIntersect(loc + new Vector3(gridSize, gridSize)/2f, loc + new Vector3(gridSize, -gridSize)/2f)){
+                        
+                        nodeDictionary.Add(loc.ToString(), new GraphNode(loc));
                 }
             }
         }
         
+         //ASSIGNMENT 1 EDIT ABOVE THIS LINE
         
-        //ASSIGNMENT 1 EDIT ABOVE THIS LINE
-
-        //Create Neighbors
+         //Create Neighbors
         foreach (KeyValuePair<string, GraphNode> kvp in nodeDictionary)
         {
             //Left
