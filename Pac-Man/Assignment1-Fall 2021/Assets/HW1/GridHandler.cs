@@ -19,11 +19,13 @@ public class GridHandler : NodeHandler
         gridSize = ObstacleHandler.Instance.GridSize;
         
         for (float x = ObstacleHandler.Instance.XBound * -1; x <= ObstacleHandler.Instance.XBound + gridSize; x += gridSize)
-        {
-            
-            //Vector3 loc = new Vector3(x, y);
-            //nodeDictionary.Add(loc.ToString(), new GraphNode(loc));
-           
+        {    for (float y = ObstacleHandler.Instance.YBound * -1; y <= ObstacleHandler.Instance.YBound + gridSize; y += gridSize)
+            {
+                if(! ObstacleHandler.Instance.PointInObstacles(new Vector2(x, y))){
+                    Vector3 loc = new Vector3(x, y);
+                    nodeDictionary.Add(loc.ToString(), new GraphNode(loc));
+                }
+            }
         }
         
         
