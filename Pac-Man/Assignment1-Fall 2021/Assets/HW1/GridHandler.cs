@@ -29,7 +29,21 @@ public class GridHandler : NodeHandler
                     && !ObstacleHandler.Instance.AnyIntersect(loc + new Vector3(gridSize, gridSize)/2f, loc + new Vector3(-gridSize, gridSize)/2f)
                     && !ObstacleHandler.Instance.AnyIntersect(loc + new Vector3(gridSize, gridSize)/2f, loc + new Vector3(gridSize, -gridSize)/2f)){
                         
-                        nodeDictionary.Add(loc.ToString(), new GraphNode(loc));
+                        Bounds box = new Bounds(loc, new Vector3(gridSize, gridSize));
+                        bool flag = false;
+
+                        foreach (Vector3 Point in ObstacleHandler.Instance.GetObstaclePoints()){
+                            if (box.Contains(Point)){
+                                flag = true;
+                                break;
+                            }
+                        }
+
+                        if (!flag)
+                        {
+                            nodeDictionary.Add(loc.ToString(), new GraphNode(loc));
+                        }
+
                 }
             }
         }
