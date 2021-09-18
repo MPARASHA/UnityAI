@@ -30,16 +30,16 @@ public class GridHandler : NodeHandler
                     && !ObstacleHandler.Instance.AnyIntersect(loc + new Vector3(gridSize, gridSize)/2f, loc + new Vector3(gridSize, -gridSize)/2f)){
                         
                         Bounds box = new Bounds(loc, new Vector3(gridSize, gridSize));
-                        bool flag = false;
+                        bool flag = true;
 
                         foreach (Vector3 Point in ObstacleHandler.Instance.GetObstaclePoints()){
                             if (box.Contains(Point)){
-                                flag = true;
+                                flag = false;
                                 break;
                             }
                         }
 
-                        if (!flag)
+                        if (flag)
                         {
                             nodeDictionary.Add(loc.ToString(), new GraphNode(loc));
                         }
