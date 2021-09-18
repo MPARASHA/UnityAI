@@ -23,7 +23,7 @@ public class GridHandler : NodeHandler
             {   
                 Vector3 loc = new Vector3(x, y); // The center of cell
 
-                if(!ObstacleHandler.Instance.PointInObstacles(loc)            
+                if (!ObstacleHandler.Instance.PointInObstacles(loc)            
                     && !ObstacleHandler.Instance.AnyIntersect(loc - new Vector3(gridSize, gridSize)/2f, loc + new Vector3(-gridSize, gridSize)/2f)
                     && !ObstacleHandler.Instance.AnyIntersect(loc - new Vector3(gridSize, gridSize)/2f, loc + new Vector3(gridSize, -gridSize)/2f)
                     && !ObstacleHandler.Instance.AnyIntersect(loc + new Vector3(gridSize, gridSize)/2f, loc + new Vector3(-gridSize, gridSize)/2f)
@@ -39,8 +39,7 @@ public class GridHandler : NodeHandler
                             }
                         }
 
-                        if (flag)
-                        {
+                        if (flag){
                             nodeDictionary.Add(loc.ToString(), new GraphNode(loc));
                         }
 
