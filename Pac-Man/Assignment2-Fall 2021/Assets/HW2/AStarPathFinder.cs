@@ -17,13 +17,16 @@ public class AStarPathFinder : GreedyPathFinder
 
         PriorityQueue<AStarNode> openSet = new PriorityQueue<AStarNode>();
         openSet.Enqueue(start);
-        Dictionary<string, float> gScores = new Dictionary<string, float>();
+        Dictionary<string, AStarNode> openSetDict = new Dictionary<string, AStarNode>();
+
+        List<GraphNode> closedSet = new List<GraphNode>();
 
         int attempts = 0;
         while (openSet.Count() > 0 && attempts<10000)
         {
             attempts += 1;
             AStarNode currNode = openSet.Dequeue();
+            closedSet.Add(currNode.GraphNode);
 
             //Did we find the goal?
             if (currNode.Location == goalNode.Location)
@@ -36,11 +39,23 @@ public class AStarPathFinder : GreedyPathFinder
             //Check each neighbor
             foreach (GraphNode neighbor in currNode.GraphNode.Neighbors)
             {
+                if(closedSet.Contains(neighbor)){
+                    continue;
+                }
+
                 gScore = currNode.GetGScore() + ObstacleHandler.Instance.GridSize;
                     
                 AStarNode aStarNeighbor = new AStarNode(currNode, neighbor, Heuristic(neighbor, goalNode));
-                openSet.Enqueue(aStarNeighbor);
-                gScores[neighbor.Location.ToString()] = gScore;                    
+                
+                if(!openSetDict.ContainsKey(neighbor.Location.ToString())){
+                    openSet.Enqueue(aStarNeighbor);
+                    openSetDict[neighbor.Location.ToString()] = aStarNeighbor;  
+                }
+                else if(gScore < openSetDict[neighbor.Location.ToString()].GetGScore()){
+                    openSet.Remove(openSetDict[neighbor.Location.ToString()]);
+                    openSet.Enqueue(aStarNeighbor);
+                    openSetDict[neighbor.Location.ToString()] = aStarNeighbor;     
+                }               
                 
             }
         }
