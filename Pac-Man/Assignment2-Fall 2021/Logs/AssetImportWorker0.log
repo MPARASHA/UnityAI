@@ -77,3 +77,54 @@ Received Import Request.
 Start importing Assets/Scripts/SpaceRepresentation/ObstacleHandler.cs using Guid(b108dfef195ca0042a117fb9783e7942) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59a8024f7aa237fc49aa7ba6fb409ef6') in 0.059440 seconds
   Import took 0.063046 seconds .
 
+========================================================================
+Received Import Request.
+  Time since last request: 114.716419 seconds.
+  path: Assets/HW2/ObstacleTest3Points.cs
+  artifactKey: Guid(ec714b7eca4e341b0bf52b256169ddf0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/HW2/ObstacleTest3Points.cs using Guid(ec714b7eca4e341b0bf52b256169ddf0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7676401a680c573528c304e1ecbe1ab4') in 0.007562 seconds
+  Import took 0.010975 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003149 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.62 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.100 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.51 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1671 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 72.0 MB.
+System memory in use after: 72.1 MB.
+
+Unloading 40 unused Assets to reduce memory usage. Loaded Objects now: 2093.
+Total: 5.518900 ms (FindLiveObjects: 0.191800 ms CreateObjectMapping: 0.073900 ms MarkObjects: 5.228900 ms  DeleteObjects: 0.022100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003807 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.71 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.373 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.57 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1671 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 72.0 MB.
+System memory in use after: 72.1 MB.
+
+Unloading 40 unused Assets to reduce memory usage. Loaded Objects now: 2096.
+Total: 5.406300 ms (FindLiveObjects: 0.164600 ms CreateObjectMapping: 0.125600 ms MarkObjects: 5.091300 ms  DeleteObjects: 0.023200 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

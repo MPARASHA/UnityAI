@@ -12,7 +12,7 @@ public class Clyde : FSMAgent
 
     public override void Initialize()
     {
-        currState = new ChaseState();
+        currState = new ChaseStateClyde();
         currState.EnterState(this);
     }
 }

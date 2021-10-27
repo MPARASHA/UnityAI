@@ -12,7 +12,7 @@ public class CustomGhost : FSMAgent
 
     public override void Initialize()
     {
-        currState = new ChaseState();
+        currState = new ChaseStateCustom();
         currState.EnterState(this);
     }
 }
