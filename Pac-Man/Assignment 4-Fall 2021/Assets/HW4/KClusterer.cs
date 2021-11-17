@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class KClusterer
 {
-    const int K = 3;//TODO; set K to the optimal value that you've found via experimentation
-    const int MAX_ATTEMPTS = 10000;//Maximum number of clustering attempts, you may want to use this
-    const float threshold = 0.02f;//Threshold for cluster similarity, you may want to use this and alter it if so
+    const int K = 8;//TODO; set K to the optimal value that you've found via experimentation
+    const int MAX_ATTEMPTS = 1000;//Maximum number of clustering attempts, you may want to use this
+    const float threshold = 1f;//Threshold for cluster similarity, you may want to use this and alter it if so
 
     //TODO; fix this function
     public Dictionary<Datapoint, List<Datapoint>> Cluster(Datapoint[] datapoints)
@@ -35,40 +35,60 @@ public class KClusterer
             clustersByCenters.Add(center, new List<Datapoint>());
         }
 
-        //Map each datapoint to the closest center
-        foreach (Datapoint pnt in datapoints)
-        {
-            Datapoint closestCenter = null;
-            float minDistance = float.PositiveInfinity;
-
-            foreach (Datapoint center in centers)
-            {
-                float thisDistance = Distance(pnt, center);
-                if (thisDistance < minDistance)
-                {
-                    closestCenter = center;
-                    minDistance = thisDistance;
-                }
-            }
-
-            clustersByCenters[closestCenter].Add(pnt);
-        }
         // oldcentroids = []
         List<Datapoint> oldCentroids = new List<Datapoint>();
 
         int attempts = 0;
         // while not centroids==oldcentroids:
-        //while ((DifferenceBetweenCenters(oldCentroids.ToArray(), centers.ToArray()) < threshold) && (attempts < MAX_ATTEMPTS)){
+        while ((DifferenceBetweenCenters(oldCentroids.ToArray(), centers.ToArray()) < threshold) && (attempts < MAX_ATTEMPTS)){
+
+            attempts += 1;
+            oldCentroids = new List<Datapoint>(centers);
 
 
-            // oldcentroids = centroids
+            //Map each datapoint to its closest center
+
+            clustersByCenters = new Dictionary<Datapoint, List<Datapoint>>();
+
+            //Instantiate clusters by these centers
+            foreach (Datapoint center in centers)
+            {
+                clustersByCenters.Add(center, new List<Datapoint>());
+            }
+
+            //Map each datapoint to the closest center
+            foreach (Datapoint pnt in datapoints)
+            {
+                Datapoint closestCenter = null;
+                float minDistance = float.PositiveInfinity;
+
+                foreach (Datapoint center in centers)
+                {
+                    float thisDistance = Distance(pnt, center);
+                    if (thisDistance < minDistance)
+                    {
+                        closestCenter = center;
+                        minDistance = thisDistance;
+                    }
+                }
+
+                clustersByCenters[closestCenter].Add(pnt);
+            }
+
             
             //Instantiate clusters by these centers
-            
-            //Map each datapoint to its closest center
-            
+            centers = new List<Datapoint>();
 
+            foreach (Datapoint center in oldCentroids)
+            {
+                Datapoint newCenter = GetAverage(clustersByCenters[center].ToArray());
+                centers.Add(newCenter);
+            }
+            
+            
+        }       
         return clustersByCenters;
+        
     }
 
     //Calculate the difference between sets of centers
@@ -172,14 +192,14 @@ public class KClusterer
     public static float Distance(Datapoint a, Datapoint b)
     {//HoursPlayed: 2143 Level: 334 Pellets Eaten: 509712 Fruit Eaten: 1319 Ghosts Eaten: 37927 Average Score: 2061 Max Score: 5010 Total Score: 359495
         float dist = 0;
-        dist += (Mathf.Abs(a.HoursPlayed - b.HoursPlayed));
-        dist += (Mathf.Abs(a.Level - b.Level));
-        dist += (Mathf.Abs(a.PelletsEaten - b.PelletsEaten));
-        dist += (Mathf.Abs(a.FruitEaten - b.FruitEaten));
-        dist += (Mathf.Abs(a.GhostsEaten - b.GhostsEaten));
-        dist += (Mathf.Abs(a.AvgScore - b.AvgScore));
-        dist += (Mathf.Abs(a.MaxScore - b.MaxScore));
-        dist += (Mathf.Abs(a.TotalScore - b.TotalScore));
+        dist += (Mathf.Abs(a.HoursPlayed - b.HoursPlayed) * 100f/4331f);
+        dist += (Mathf.Abs(a.Level - b.Level) * 100f/81f);
+        dist += (Mathf.Abs(a.PelletsEaten - b.PelletsEaten)/10720f);
+        dist += (Mathf.Abs(a.FruitEaten - b.FruitEaten) * 100f/7916f);
+        dist += (Mathf.Abs(a.GhostsEaten - b.GhostsEaten) * 100f/95577f);
+        dist += (Mathf.Abs(a.AvgScore - b.AvgScore) * 100f/1310f);
+        dist += (Mathf.Abs(a.MaxScore - b.MaxScore) * 100f/5416f);
+        dist += (Mathf.Abs(a.TotalScore - b.TotalScore) * 100f/919437f);
         return dist;
     }
 
